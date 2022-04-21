@@ -13,7 +13,7 @@ header:
   teaser: /assets/images/htb/htb.png
 ribbon: green
 description: "Writeup for HTB - TimeLapse"
-categories: ['HTB']
+categories: ['HTB','Offsec']
 ---
 
 - [Hack The Box - TimeLapse](#hack-the-box---timelapse)
