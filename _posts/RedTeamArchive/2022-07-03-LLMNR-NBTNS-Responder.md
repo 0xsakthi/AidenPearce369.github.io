@@ -15,8 +15,6 @@ categories:
   - Offsec
 ---
 
-# LLMNR & NBT-NS Poisoning via Responder
-
 <center>
 <img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/LLMNR-NBT-NS-Poisoning/24.png" style="width:80%">
 </center>
