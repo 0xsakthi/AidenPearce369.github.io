@@ -62,7 +62,7 @@ Assuming a user/victim in an infrastructure of Windows AD Network tries to load 
 <img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/LLMNR-NBT-NS-Poisoning/3.png" style="width:80%">
 </center>
 
-So we or the Windows machine either doesn't know what's the IP address of the hostname and it will try to lookup the IP address by resolving the hostname on the following order which we discussed above
+If either us or the Windows machine doesn't know what's the IP address of the hostname,it will try to lookup the IP address by resolving the hostname on the following order which we discussed above
 
 If it was found in ```Hosts file```,```Local DNS Cache``` it would not have to interact outside the local machine, most frequently resolved hostname will be found here itself
 
