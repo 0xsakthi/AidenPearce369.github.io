@@ -16,7 +16,7 @@ categories:
 ---
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/logo.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/logo.png" style="width:90%">
 </center>
 
 - [AMSI Bypass - Memory Patching](#amsi-bypass---memory-patching)
