@@ -123,7 +123,7 @@ But these can be easily bypassed by obfuscation techniques in the memory of the 
 <img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/10.png" style="width:80%">
 </center>
 
-Here rises as question that why can't we use obfuscation to bypass AMSI everytime. Of course we can bypass AMSI using obfuscation, but that is not reliable everytime. AV signatures gets updated every day for every kind of latest obfuscation. So it is not recommended to prefer obfuscation for longer run.
+Here rises a question that why can't we use obfuscation to bypass AMSI everytime. Of course we can bypass AMSI using obfuscation, but that is not reliable everytime. AV signatures gets updated every day for every kind of latest obfuscation. So it is not recommended to prefer obfuscation for longer run.
 
 ## AMSI Internals
 
@@ -234,7 +234,7 @@ Editing the JS output handlers for the required functions based on their structu
 <img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/13.png" style="width:90%">
 </center>
 
-Now lets test the debuggin data by passing some dummy strings in the PowerShell session,
+Now lets test the debugging data by passing some dummy strings in the PowerShell session,
 
 <center>
 <img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/14.png" style="width:90%">
@@ -311,6 +311,8 @@ Here this address ```0x80070057``` refers to ```E_INVALIDARG``` which gets store
 Reference for [E_INVALIDARG](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/705fb797-2175-4a90-b5a3-3918024b10b8) 
 
 ## Patching amsi.dll
+
+```AmsiScanString``` calls ```AmsiScanBuffer```, so if we patch these bytecodes in front of ```AmsiScanBuffer```, ```AmsiScanString``` will also loose its power to detect
 
 So if we use the right side block having ```0x80070057``` value in it before the scan, the function ends without scanning the fileless content and allows us to execute malicious payloads
 
