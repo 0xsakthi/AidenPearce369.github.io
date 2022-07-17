@@ -16,7 +16,7 @@ categories:
 ---
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/logo.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/logo.png" style="width:60%">
 </center>
 
 - [AMSI Bypass - Memory Patching](#amsi-bypass---memory-patching)
@@ -35,7 +35,7 @@ AMSI or ```Anti Malware Scan Interface``` is a defensive mechanism used by ```Po
 AV softwares are so developed today which has many detection mechanisms to find malwares and threats. But the need for AMSI rises when AV fails to check file less content which completely relies on memory and doesn't land on disk. AV performs detection for files on disk and files attempting to create process. But what if an attacker tries to perform threat controlled in memory via commands or via malicious fileless scripts, thats where AMSI comes into action. AMSI peforms detection for malicious content in commands or fileless scripts
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/1.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/1.png" style="width:60%">
 </center>
 
 Windows components that integrate with AMSI are,
@@ -62,13 +62,13 @@ Whenever a command is passed (or) a fileless content is ran (scripts), the AMSI 
 These AMSI integrated application makes ```RPC calls``` with Windows Defender or other 3rd party AV to process the scanned data. The sole purpose of AMSI is to act as bridge between detection of file less contents and Windows Defender/ AV Softwares
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/2.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/2.png" style="width:80%">
 </center>
 
 These strings doesn't seem to trigger AMSI while loading our file less content. Lets see how it detects some realtime badass malicious script, ```Mimikatz```
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/3.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/3.png" style="width:80%">
 </center>
 
 When we try to load Mimikatz into memory, it gets detected by AMSI and raises an alert to the Windows Defender because it has malicious content which got detected before. This gets stored in ```Windows Event Logs``` with the event ID of ```1116```
@@ -82,23 +82,23 @@ Event Viewer -> Application and Services Logs -> Microsoft -> Windows -> Windows
 ```
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/4.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/4.png" style="width:80%">
 </center>
 
 We can also filter these event logs in PowerShell CLI
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/5.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/5.png" style="width:80%">
 </center>
 <br>
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/6.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/6.png" style="width:80%">
 </center>
 
 These detection data from AMSI will be processed by Windows Defender/ AV Softwares for further analytics and triaging
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/7.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/7.png" style="width:80%">
 </center>
 
 We can see that our previous incident is stored and the threat is removed by Windows Defender
@@ -106,7 +106,7 @@ We can see that our previous incident is stored and the threat is removed by Win
 There is an another interesting behaviour of AMSI. AMSI just checks the string/patterns in the memory and flags it as malicious. There are some strings which are considered to be extremely dangerous in the wild which AMSI flags it as malicious on the moment when it is found.
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/8.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/8.png" style="width:90%">
 </center>
 
 Here ```Invoke-Unknown``` is an undefined cmdlet, which throws an ```CommandNotFoundException``` error when it is called. But in the same way when we call ```Invoke-Mimikatz``` which is not even loaded in the memory, it triggers the AMSI with ```ScriptContainedMaliciousContent``` error
@@ -114,13 +114,13 @@ Here ```Invoke-Unknown``` is an undefined cmdlet, which throws an ```CommandNotF
 And AMSI flags some of its internal functions as malicious, because attackers might use these functions with their violent intentions to tamper AMSI. So AMSI becomes self reserved and flags these function as malicious too
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/9.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/9.png" style="width:80%">
 </center>
 
 But these can be easily bypassed by obfuscation techniques in the memory of the process
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/10.png" style="width:80%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/10.png" style="width:80%">
 </center>
 
 Here rises as question that why can't we use obfuscation to bypass AMSI everytime. Of course we can bypass AMSI using obfuscation, but that is not reliable everytime. AV signatures gets updated every day for every kind of latest obfuscation. So it is not recommended to prefer obfuscation for longer run.
@@ -217,7 +217,7 @@ Whatever the content may be or however the function may work, the result from th
 We know that ```amsi.dll``` is responsible for exporting these functions into the process with which AMSI is integrated with. Now lets use ```Process Hacker``` to see how it exports these functions.
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/11.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/11.png" style="width:90%">
 </center>
 
 The ```amsi.dll``` is loaded into a base address which is not even static and from there it exports all the functions which are required for AMSI. So whatever we try to do for bypassing AMSI should be ```dynamic```
@@ -225,19 +225,19 @@ The ```amsi.dll``` is loaded into a base address which is not even static and fr
 Using ```frida-trace``` to debug Win32 AMSI API Calls and generating output handlers to debug the AMSI functions,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/12.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/12.png" style="width:90%">
 </center>
 
 Editing the JS output handlers for the required functions based on their structure format to get detailed debugging data,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/13.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/13.png" style="width:90%">
 </center>
 
 Now lets test the debuggin data by passing some dummy strings in the PowerShell session,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/14.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/14.png" style="width:90%">
 </center>
 
 We can see that our string ```test``` gets scanned by AMSI and produces the result which has its value in ```0x58b084e858```
@@ -245,7 +245,7 @@ We can see that our string ```test``` gets scanned by AMSI and produces the resu
 Changing the result output into ```Memory.readUShort(args[])```, so that it can read the result value from that memory
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/15.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/15.png" style="width:90%">
 </center>
 
 The structure of ```AMSI_RESULT``` with its corresponding values. So for each scan our result value should lie within 1 to 32768
@@ -263,13 +263,13 @@ enum AMSI_RESULT{
 Now testing with legitimate string patterns should give us ```1```,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/16.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/16.png" style="width:90%">
 </center>
 
 Now testing with malicious string patterns should give us ```32768```,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/17.png" style="width:90%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/17.png" style="width:90%">
 </center>
 
 If we somehow able to tamper or patch the value, we can control the AMSI in the current memory and load our malicious scripts
@@ -281,7 +281,7 @@ Lets load our ```amsi.dll``` into diassembler and view its instructions,
 Disassembling ```AmsiScanString``` 
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/18.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/18.png" style="width:60%">
 </center>
 
 We can clearly see that ```AmsiScanString``` always load ```AmsiScanBuffer``` when it is invoked
@@ -289,7 +289,7 @@ We can clearly see that ```AmsiScanString``` always load ```AmsiScanBuffer``` wh
 Disassembling ```AmsiScanBuffer```
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/19.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/19.png" style="width:60%">
 </center>
 
 Seems like these two functions are performing validations on the provided arguments and starts the scan 
@@ -297,11 +297,11 @@ Seems like these two functions are performing validations on the provided argume
 But the one thing common on those two functions is the error handling block
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/20.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/20.png" style="width:60%">
 </center>
 <br>
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/21.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/21.png" style="width:60%">
 </center>
 
 We can see that the left block performs the scan after all the arguments are validated without error, whereas the right block executes when there is an error in validating the arguments and ends the function
@@ -317,7 +317,7 @@ So if we use the right side block having ```0x80070057``` value in it before the
 The instruction in the right side block is,
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/22.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/22.png" style="width:60%">
 </center>
 
 ```c
@@ -327,7 +327,7 @@ mov eax, 0x80070057
 After this we have to perform ```ret``` to exit the function, so the bytecode for these instruction will be ```b857000780c3```
 
 <center>
-<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/23.png" style="width:60%">
+<img src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/23.png" style="width:60%">
 </center>
 
 Now we know the bytecode for patching the AMSI, but we cannot patch it everytime with the help of debugger. We need some dynamic code to load it into the memory of PowerShell session to patch the AMSI. 
@@ -406,7 +406,7 @@ $out = 0
 We have successfully applied patch and bypassed the AMSI detection
 
 <video width="100%" preload="auto" muted controls>
-    <source src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Patch.mkv" type="video/mp4"/>
+    <source src="https://raw.githubusercontent.com/AidenPearce369/my-CDN/main/AMSI-Memory-Patch/AMSI-Patch.mkv" type="video/mp4"/>
 </video>
 
 ## References
@@ -414,4 +414,3 @@ We have successfully applied patch and bypassed the AMSI detection
 [https://fluidattacks.com/blog/amsi-bypass/](https://fluidattacks.com/blog/amsi-bypass/)
 
 [https://rastamouse.me/memory-patching-amsi-bypass/](https://rastamouse.me/memory-patching-amsi-bypass/)
-
